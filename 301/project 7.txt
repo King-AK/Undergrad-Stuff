@@ -1,0 +1,4 @@
+-Implement ability to save and load mazes
+-Functionality for Pause Button
+-Fix Tremaux
+-Add extra shit to make the maze seem cooler(backgrounds, bitmap images, textures for the walls, maybe tiles or grass on the ground and such. Put a moon in the sky)

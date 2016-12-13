@@ -1,0 +1,42 @@
+For the Wednesday Night: get a hold of samsung s5 driver software for eclipse application development/testing
+
+Android Lint used to evalutate code and make sure youre following correct syntax and adding important attributes
+ADB android debug bridge.
+List of tools in video 2 of gassner. Look in Android dev documentation for tips and tricks on all the tools.
+
+Android Project Structure
+
+src folder - contains java code. Package containing classes which represent the apps activities. Base package, and is registered in the Manifest. Package must be universally unique.
+
+gen folder - classes that are generated automatically durinh development, with on of the most important being R. Do not modifiy the R class. It should only be modified by the development tools.
+
+sdk folder - jar file that is part of the sdk installation. changed by changing the target sdk.
+
+Android Private Libraries - support libraries allowing you to emulate features of modern android apps for older versions of android
+
+Assets folder -contains any files you want to include in your project that dont have to be addressable as Java objects.Files here are simply packaged with the app.Can add ANYTHING here that the app needs.
+
+bin directory - like the gen directory. dont touch it.\
+
+libs directory - place to add java libraries
+
+Manifest file - an all important XML file. Graphical UI. Can be modified directly. Much of an android apps behavior is worked with here, in the XML file, rather than in the Java code.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Layouts in Android - Define layouts in individual XML files, load them at runtime with the setContentView method, used in the onCreate method of the MainActivity class within the src folder. Refer to the layout XML file by its Java identifier, which is automatically generated in the R class.
+
+-----------------------------------------------------------
+All visual widgets are objects/subclasses of the view class.
+View class is in android.view, and as an example, one of its subclasses would be TextView.
+A ViewGroup is also a subclass of the View object. It has many subclasses such as LinearLayout, AbsoluteLAyout, and RelativeLAyout. Functionally, these ViewGroups are layout containers and lay out the view objects in certain ways.
+-----------------------------------------------------------
+Units of measurement in Android. Dimensions. Objects can be placed relative to one another, but when not doing this and setting objects manually, you need to be aware of units of measurement. Can be used in either XML layout files or programatically. Most values can be changed at runtime with Java code.
+Device Independent Pixels (DPs) - allows devices to automatically compensate for their own unique pixel densities.Android does the work to make sure pixel placement matches up from device to device.
+Scale-Independent Pixels (SPs) - used for font sizes
+
+Fixed units of measurement including pixels, points, millimeters and inches can be used, but they WILL NOT adjust to different devices automatically.
+Dimensions can be hard-coded in XML layout.
+Dimension Resource files define reusable dimensions and belong in the res/values folder.
+To refer to a dimension resource, make use of syntax similar to what is used when refering to a string resource.
+When managing multiple screens, you'll create the default dimensions XML file in the Values folder. Alternative settings can be set for different size, pixel densities and device orientations.
+-------------------------------------------------------------------------------------------------------------------
+new screens/views : Create a new activity and Create a new layout. bound the activity to the layout in code, and register the activity in the manifest file.

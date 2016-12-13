@@ -1,0 +1,13 @@
+On android, java.awt and java.swing packages do not exist, so they will need to be replaced by corresponding Android supported packages.
+10 different classes which have the AWT problem in the maze codebase, 8 of which need to be adjusted
+
+
+Homework 6 - we are not at this point cutting off reliability on the AWT package/objects. We are taking a look at all classes 3-10 in the outline, seeing what AWT methods they rely on, and creating corresponding methods in the mazePanel class to feed to them.
+
+For some classes, look at their methods(like RangeSet) it may be possible to make things easier by simple rewriting. Remeber the use of an array done in class!
+
+Go through each of the 8 classes, see what AWT/swing methods each relies on and write it down. 
+Create a corresponding feeder method in the MazePanel Class
+Eliminate AWT reliance in these classes by removing their import statements, and make their methods call MazePanel.newmethod() instead.
+
+Test the java application to see if it still works as normal.

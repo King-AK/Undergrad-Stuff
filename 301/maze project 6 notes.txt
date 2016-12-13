@@ -1,0 +1,3 @@
+Make the maze application work on android. Need to be able to walk the maze at a minimum, robot driver implementation isnt as pressing right now.
+
+Create a drawview class that will overlay on the playstate activity. make this a middleman between the mazepanel and the playstate to keep a clean interface. Make use of and define the onDraw method so that there are invalidations and redraws to the screen.

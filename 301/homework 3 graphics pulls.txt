@@ -1,0 +1,66 @@
+check awt swing use in all the following classes. list what methods are called from swing/awt in these classes. create corresponding methods inside mazePanel.
+
+1)Maze.java DONE :)
+	keyDown() -  takes an Event object from the awt package for proper functioning, possibly get rid of event altogether?
+		-different event cases: up, left, right, down
+
+	getPanel() - returns a panel object, switch to return a MazePanel object
+	
+
+
+
+2)Viewer interface - DONE :)
+	redraw() - takes a graphics object from the awt package
+
+3)Deafault Viewer - DONE :)
+	redraw() - takes a graphics object
+	
+4)FirstPersonDrawer.java DONE :)
+	Graphics in field - has a graphics object, used for the buffer image the class draws on
+	redraw() - takes a graphics object
+	
+	Color.black - color from awt package
+	Color.darkGray - color from awt package
+	Color.white - color from awt package
+
+	Point object used and the intersect method called on the point object.
+	couple different graphics methods called including fillPolygon() and setColor() 
+ 
+
+5)MapDrawer.java :)
+	redraw() - takes a graphics object
+	draw_map() - takes a graphics object
+	draw_currentlocation - takes a graphics object
+	draw_solution() - takes a graphics object
+	calls setColor() on the graphics object
+	includes Color.white, Color.gray, Color.red,Color.yellow
+	
+6)MazeView.java DONE :)
+	redraw() - takes a graphics object
+	redrawTitle() takes a graphics object
+	setcolor called.
+	Uses FontMetrics object inside redrawTitle method.
+	includes color.white, color.red, color.blue,
+	includes smallBannerFont, largeBannerFont
+	
+	redrawFinish() - takes a graphics object
+	calls setcolor
+	uses color.blue, yellow, orange, white
+	calls setFont
+	
+	redrawGenerating uses a graphics object
+	sets color yellow,black,red
+	sets font largeBanner, small banner
+	
+	centerString takes a graphics object and Fontmetrics object
+	font objects created at the end of the document
+	
+
+7)RangeSet.java - DONE, FRIEND :)
+	uses the point object in the intersect function - replace with a java array
+	
+8)Seg.java
+	
+	has a color object in the field
+	uses a couple different color valeues in constructor
+	color used in the fileWriter.appendChild of storSeg()

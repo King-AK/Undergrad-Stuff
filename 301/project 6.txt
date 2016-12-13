@@ -1,0 +1,9 @@
+fill oval - line 165 of mapdrawer
+setcolor orange of mazepanel set to cyan for testing
+
+implement generating phases, touch up play activities and graphics implementations, test and refactor code meticulously, and add some custom bells and whistles.
+
+currently have null pointer in play activity
+
+Everything works fine up to the point where FirstPersonDrawer is called in the android activity...
+newmazes and redraws are getting called before the mazepanel is ever constructed...look into the generating phase and adjust this.

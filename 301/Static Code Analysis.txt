@@ -1,0 +1,7 @@
+Static Code Analyzer - Only read code. Does not actually contruct it, or help with problems including dead code, memory leaks, null pointer references, etc.
+
+	input - program code
+	analysis - applies  algorithms, computes metrics. searches for patterns in code which matches a rule base.
+	outputs - values for metrics, lines which match the given patterns. Can find what is used commonly and uncommonly in the codebase.
+
+	Can be given rule sets- document experience, lessons learnt, best practices. Gives feedback on coding practices.
