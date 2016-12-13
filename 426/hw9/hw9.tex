@@ -1,0 +1,71 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 0pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+\centerline{VJ Davey}\vskip 0.10cm
+\begin{LARGE}
+\centerline {\bf CSci 426 Homework 9}
+\end{LARGE}
+\vskip 0.25cm
+\begin{enumerate}
+	\item Consider an M/M/2/3/4 queuing system. Assume that each customer returns to the system on average, 15 sconds after leaving the system, exponentially distributed. Also assume that each customer on average requires 20 seconds of service, exponentially distributed. 
+	\begin{itemize}
+		\item\textbf{ Draw the appropriate state space Markov Diagram}
+		\vskip 7cm
+		\item \textbf{Give the steady state probability of being in each state}
+		\\\textit{ Work done is attached on a separate page.}\\
+		$\begin{array}{cc}
+			State & Probability \\ 
+			0 & .1009 \\ 
+			1 & .3027 \\ 
+			2 & .3405 \\ 
+			3 & .2554
+		\end{array} $
+		\item \textbf{Give the system throughput}
+		\\Throughput is going to be our flow in and also our flow out. We calculate the total flow in and out of each state and multiply by the probability of being in each respective state and compare to verify correct results. Work is attached.
+		The throughput of our system is $\frac{1}{29.89}$ jobs/sec
+		\item \textbf{Give the system utilization}
+		\\Utilization is $.8991$ . This is 1 minus the probability of being in state 0.
+		\item \textbf{ Give the average response time of a customer}
+		\\Little's Law is useful here. Given that $N=\lambda T$, where N is the average number in the node and T is the response time we are looking for, we must first find the average number in the node. This can be done by taking the probability of each state and multiplying it times the number of jobs in the system corresponding to that state to give us our expected number in the system. This number is $1.7499$. 
+		\\Returning to Little's Law, we find T by dividing N by $\lambda$, our throughput. Doing this gives us 52.3 seconds as our average response time.
+		\item \textbf{Give the mean queue length}
+		\\Mean queue length is equal to the average number in the system minus the average number in service. With the results we have so far, we know this means $1.7499 - .8991$. The mean queue length is $.8508$.
+		\item \textbf{Give the mean time that a customer waits in the queue without being serviced}
+		\\The mean time a customer waits in the queue is equivalent to the mean number in the queue divided by the system throughput, as established on PP 391 of the textbook. With the results found in previous problems, we know that this will be $25.43$ seconds.
+	\end{itemize}
+	
+	\item Exercise Room question. Inter-arrival time is 15 minutes. Each piece of equipment used for 20 minutes.
+	\begin{itemize}
+		\item \textbf{Draw an appropriate high level queuing network and the appropriate underlying Markov diagram. Label all arcs.}
+		\vskip 10cm
+		\item \textbf{Give the appropriate Kendall Notation for each of the pieces of equipment}
+		\\StairMaster:  M/M/1/1 queue
+		\\Bike:  M/M/2/2 queue
+		\item \textbf{In steady state, are the probabilites of being in each state all equal? Justify briefly. (assume steady state probabilities of all states are equal for the remaining problems.)}
+		\\The probability of being in each state cannot be equal. This is verifiable by comparing the flow in and out of state 00. We are able to discern that the probability of being in state 01 is the ratio $\frac{\lambda}{\mu}$ times the probability of being in state 00. Since we know the values $\lambda = 15$ minutes and $\mu = 20$ minutes, we know that the probability of these two states are not equal. This means that the entire set can't possibly be equal since we know there is at least one case that tells us otherwise. A list of equations and scratch work is attached.
+		\item \textbf{Give the mean number of athletes using the stationary bike}
+		\\The mean number of athletes using the bike is 1. This is found by considering states where the bike(s) is/are in use and multiplying the number of bikes in use times the probability of being in that state. (We know that the probability of being in each state is 1/6). Work is attached.
+		\item \textbf{What is the percentage of customers who come to the exercise room wanting to use the stairmaster that must leave in disgust because its busy?}
+		\\50 percent of the customers must leave in disgust. This is because half of the states the exercise room could possibly be in don't allow for new arrivals to the stair master, and each state has equal probability.
+		\item \textbf{What is the "good" throughput of the exercise room?}
+		\\Good throughput occurs when we have customers are going through the system in such a way that whenever a customer finishes using the stairmaster, that there is always an open bike for them and there is no need to leave to building to avoid loitering. This will occur either when $\lambda$ is equal or greater than $\mu$ and there is a longer gap between interarrivals than there is between completion of equipment use. When this happens, there is no build up, and we would never enter a state of loitering.
+		
+	\end{itemize}
+\end{enumerate}
+\end{document}

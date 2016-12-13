@@ -1,0 +1,58 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 0pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+\centerline{VJ Davey}\vskip 0.10cm
+\begin{LARGE}
+\centerline {\bf CSci 426 Notes Queueing Theory}
+\end{LARGE}
+\vskip 0.25cm
+\begin{enumerate}
+	\item Markov Chain
+	\vskip.40cm
+	\item \textbf{Kendall's Notation}
+	\\Kendall Notation is \textit{the standard system used to describe and classify a queueing node}. It was proposed by D.G. Kendall in 1953. It originally follows a pattern A|S|c, where A denoted the time between arrivals to the queue, S denotes service time, and c denoted the number of servers at the node.
+	Since its original proposal, it has been extended to A|S|c|K|N|D, where K is the capacity of the node, N is the size of the population of jobs to serve, and D is the queueing discipline. 
+	\\When the final parameters K, N, and D are not specified, it is assumed that $K = \infty$,$ N = \infty$, and $D = FIFO$.
+	\begin{enumerate}
+		\item \textit{The Arrival Process, A - Generally assumed to be Markovian/Memoryless (represented by the symbol M) at most basic level}. There are other kinds of arrivals including batch Markov($M^X$), Markovian arrival process(MAP), Degenerate distributions(D), etc. 
+		\item \textit{The Service Time Distribution, S - Generally assumed to be Markovian/Memoryless (represented by symbol M) at most basic level}. There are other kinds of service time distributions including bulk Markov$(M^Y)$, Degenerate distribution(D), General distribution(G), etc.
+		\item \textit{The Number of Servers, c}
+		\item \textit{The Number of Places in the System, K - This is the capacity of the system.} It is the maximum number of customers allowed inside the node including those in service. Generally assumed to be unlimited unless otherwise mentioned.
+		\item \textit{The Calling Population, N - The size population where the customers come from.} This is generally assumed to be unlimited unless otherwise mentioned.
+		\item The Queue's Discipline, D - The service priority for the jobs in the system's queue. Generally assumed to be FIFO unless otherwise mentioned.
+	\end{enumerate}
+	\vskip .40cm
+	\item \textbf{M/M/1 Queue}
+	\\The M/M/1 queue is a single server queue where job arrivals are random and job service times have an exponential distribution. This is the most elementary queueing model, and it is attractive object of study since closed form expressions can be obtained for many metrics of interest in this model. 
+	\\\textit{The state space} of the model corresponds to the number of customers in the system, including any in service.
+	\\Arrivals occur at a rate $\lambda$ and move the process from state $i$ to $i+1$.
+	\\Service times have an exponential distribution with rate parameter $\mu$ and $1/\mu$ is the mean service time.
+	\\A single server serves customers one at a time from the front of the queue, according to a FIFO discipline. When the service is complete, the customer leaves the queue and the number of customers in the system reduces by one. 
+	\\The buffer is of infinite size, and there is no limit to the number of customers it can contain. 
+	\\\textbf{The model is considered stable only if $\lambda < \mu$.} If, on average, arrivals happen faster than service completions, the queue will grow to an infinite size and the system wont be stable. Various performance measures can be computed explicitly for the M/M/1 queue. \textbf{We write $\rho = \lambda / \mu$ for the utilization of the buffer and require $\rho < 1$ for the queue to be stable}. $\rho$ represents the average proportion fo time which the server is occupied.
+	\\\textbf{The number of customers in the system }is equal to deducing which state of the Markov chain that the process is in. \textit{The probability that the process is in state $i$ is} $$\pi_i = (1-\rho)\rho^i$$ The number of customers in the system is geometrically distributed with parameter $1-\rho$. Thus the average number of customers in the system is $\rho/(1-\rho)$, and the variance of the number of customers in the system is $\rho/(1-\rho)^2$. This result holds for any work conserving service regime, such as processor sharing.
+	
+	\vskip .40cm
+	\item Little's Law
+	
+	\item 
+	
+	
+\end{enumerate}
+\end{document}

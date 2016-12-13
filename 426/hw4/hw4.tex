@@ -1,0 +1,45 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 0pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+\centerline{VJ Davey}\vskip 0.10cm
+\begin{LARGE}
+\centerline {\bf CSci 426 Homework 4}
+\end{LARGE}
+\vskip 0.25cm
+\centerline{\bf Excercises 3.2.5 and 3.3.6}
+\begin{enumerate}
+	\item \underline{3.2.5} Prove Theorem 3.2.1
+	\\Theorem 3.2.1 states that given a LRNG, defined by $g(x) =ax\mod{m}$, that its associated jump function is $g^j(x) = (a^j\mod{m})x\mod{m}$, where $j=1,2,...m-1$. $(a^j\mod{m}$ is the jump multiplier. Our concern is in proving that this function does indeed jump us to different values in the full period sequence.
+	\\On page 112 of the text, it is mentioned that for any value in the full period sequence, that value's position in the sequence corresponds to $x^i = a^ix_0\mod{m}$. We will take it as given that for any initial seed we use, that we will also be jumping from this same seed. Therefore $x_0 = x$. This considered:
+	$$g(x) =x^i = a^ix_0\mod{m} =(a^j\mod{m})x\mod{m} $$
+	$$a^ix_0\mod{m} =(a^j\mod{m})x\mod{m} $$
+	$$a^i\mod{m} =(a^j\mod{m})\mod{m} $$
+	$$a^i =a^j$$
+	Use of the multiplier j will correspond to the ith item in the sequence.
+	\item\underline{3.3.6}
+	\begin{enumerate}
+		\item (a) Construct a figure or table illustrating how $\bar{x}$ depends on M
+		\vskip 7cm
+		\item (b) At what value will saturation occur?
+		\\On my machine, I found this value to be at M = 80
+		\item (c) Any empirical argument to justify this value?
+		\\Saturation will occur when service time begins to match up with the interarrival times. The service time for this problem is 1.5 (determined from the call Uniform(1.0,2.0)). The interarrival times are dependent on the times between machine failures which are most likely decipherable from the NextFailure() function in ssms.c. While I did not decipher a specific equation, I do know that putting more machines in the pool makes it more likely that a breakdown can occur at any random point in time. This means that server utilization should increase as a function of M, and by simply running the program over an over again with increasing values of M, the saturation point could be found.  
+	\end{enumerate}
+\end{enumerate}
+\end{document}

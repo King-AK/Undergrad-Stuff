@@ -1,0 +1,41 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 0pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+\centerline{VJ Davey}\vskip 0.10cm
+\begin{LARGE}
+\centerline {\bf CSci 426 Homework 7}
+\end{LARGE}
+\vskip 0.25cm
+\begin{enumerate}
+	\item \textbf{6.2.11 }
+	\begin{enumerate}
+		\item values in the set X will range from 1 to n-1
+		\item PDF found via trial and error. CDF is determined to be the summation of the PDF for all probabilities less than x. IDF is the inversion on the CDF, F(x). 
+		\\PDF : $f(x)  = 2\times\frac{n-x}{n(n-1)}$.
+		\\CDF : $F(x)  = \sum^{x}_{i=1} 2\times\frac{n-i}{n(n-1)}$
+		\\IDF : $F*(u) = F^{-1}(F(x)) $
+		\item This can be done by combining algorithms 6.2.3 and 6.2.1, along with information in section 6.1 concerning PDFs and CDFs to create the code on the attached page.
+		\item I convinced myself this generator was correct by running test trials where I would define a value for the the variable u myself instead of leaving it to be a Random(). This would generate a random integer. I then compared this generated integer to what would be expected if I took that same integer and determined its CDF. If the values pairs matched, and they did, then I would know that I had a proper generator. 
+	\end{enumerate}
+	\item\textbf{6.3.4}
+	\\The mean in example 6.3.4 is 30. This is known by making use of functions concerning Poisson and Pascal random variates from Chapter 6.1. Since the mean of a Poisson($\mu$) variate is $\mu$ (PP 235), and the mean of a Pascal(n,p) variate is $\frac{np}{1-p}$ (PP 234), Example 6.3.4 is essentially a call on Pascal(50,0.375). The mean must be 30. 
+	The Variance is another issue. We know the variance must be larger than 50 because 50 is the variance for the Poisson alone. This compounded with a Pascal variate allows for a greater range of variation. This greater range means that we take our old variance and then increase its range by a fraction of itself, corresponding to p. We perform the following to get our variance of 66:  $\delta_{new} = \delta_{old}*p + \delta_{old}$, where our old variance is found by simply finding the pascal variance(PP 234) with the numbers given. More precisely,
+	$$\frac{50\times0.375}{(1-0.375)^2} + 0.375\times \frac{50\times0.375}{(1-0.375)^2} = 66$$
+\end{enumerate}
+\end{document}

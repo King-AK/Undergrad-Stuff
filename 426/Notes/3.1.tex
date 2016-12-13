@@ -1,0 +1,42 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 5 pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+
+\begin{LARGE}
+\centerline {\bf CSci 426 Notes 3.1}
+\end{LARGE}
+
+\centerline{VJ Davey}
+\vskip 0.35cm
+\\Chapter 3 of the textbook aims to link the models presented in Chapter 1 with the random number generation algorithms in Chapter 2 to create \textit{discrete-event simulation models that are free of any reliance on external data sources.} Primarily we focus on the single-server service node and the simple inventory system models. The Lehmer Random Number Generators free these models from their original trace-driven approach, and reliance on input data. Such reliance on traces limits the user's ability to do "what if" studies on a model.
+\vskip .30cm
+\\{\large\textbf {Single-Server Service Node}}
+\\A Uniform\{a,b\} random variable has the property that all values between a and b are equally likely, and in most applications, this is an unrealistic assumption. In such cases, a nonlinear transformation that maps values of the random number u between 0 and 1 to values of x between 0 and $\infty$. With this, it becomes appropriate to use an Exponential Random variate which does \textit{one-to-one mapping} for a small interval on the x-axis to a large interval on an exponential curve. The use of an exponential random variate corresponds naturally to the idea of jobs arriving at random, and can similarly model random service times equally likely to lie anywhere between two values a and b with an average service time $\bar{s}$ that will converge to $(a+b)/2$.
+\vskip .15cm
+\\\textsl{*** Repeated calls to Uniform\{a,b\} or Equilikely\{a,b\} will converge to $(a+b)/2$ over time. Any rate will be the inverse.***
+	\\***Exponential(x) will converge to x. Any rate will be the inverse.***}
+\vskip .15cm
+\\The steady-state and transient behaviors of a single-server service node can be examined. This section focuses on the steady-state behavior.
+\\Geometric Random Variates
+
+
+
+\end{document}

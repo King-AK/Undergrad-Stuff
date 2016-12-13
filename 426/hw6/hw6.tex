@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 0pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+\centerline{VJ Davey}\vskip 0.10cm
+\begin{LARGE}
+\centerline {\bf CSci 426 Homework 6}
+\end{LARGE}
+\vskip 0.25cm
+\begin{enumerate}
+	\item \textbf{4.3.5 }
+	\\The Histogram for Service Time is drawn below:
+	\vskip 10cm
+	CDH Mean : 1026.37
+	\\CDH Std Dev: 591.61
+	\\Sample Mean: 1026.24
+	\\Sample Std Dev: 594.77
+	\\The CDH Mean is only very slightly greater than the Sample Mean. My choice of histogram parameters a,b, and k were $a = 0.0$, $b=2050.0$, and $k=9$. a and b were chosen so that they would encompass the entirety of the sample space. k was chosen so that it would produce an aesthetically pleasing histogram as outlined by the book. This number was attained with use of Sturge's rule on pp 161 of the textbook.
+	\item \textbf{5.1.7}
+	\\Program ssq3 was modified to produce the results seen in section 3.3 by adding an Immediate Feedback extension as described on pp 195 of the text, creating a method GetFeedback(), and adding a value beta at the start of the program (as described in section 3.3). From here, beta can be defined to be one of many numbers from that section including .25, which was the saturation point for the example in that section. The Arrival rate was also adjusted to be Exponential(0.5) to match what was described in that section.
+	The resulting code is attached.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 0pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+\centerline{VJ Davey}\vskip 0.10cm
+\begin{LARGE}
+\centerline {\bf CSci 426 Homework 3}
+\end{LARGE}
+\vskip 0.25cm
+\centerline{\bf Excercises 2.3.8 and 3.1.5}
+\begin{enumerate}
+\item \textbf{\underline{2.3.8} Three identitcal boxes each contain two compartments. The first box has a \$10 bill in each compartment. The second box has a \$5 bill in each compartment. The third box has a \$5 bill in one compartment and a \$10 bill in the other. A box is selected at random and one of the compartments of that box is selected at random and is opened. If the compartment contains a \$10 bill, use Monte Carlo simulation to estimate the probability that the other compartment also contains a \$10 bill.}
+		\\To do this problem, I modified the base code of galileo.c, which was meant to simulate a three dice roll, so that it would instead model this problem. In my edit, I made it so the function Equilikely() was used with the parameters (1,2), where 1 represented one box and 2 represented another box. Since the problem stated that we are starting off with having selected a box which contains a \$10 bill, this means only two boxes are worth noting in the simulation as the box with two \$5's is not a possibility. This means either a 100\% chance of getting a \$10 with one box or a 0\% chance with the other. My edit to the function main() follows:
+		\begin{verbatim}
+		  int main(void)
+		  {
+		  long   i;                               /* replication index      */
+		  long   x;                               /* Will either be 1 or 2, corresponding to 5 or 10, respectively      */
+		  long   count[3] = {0};                 /* histogram              */
+		  double p[3]     = {0.0};               /* probability estimates  */
+		  
+		  PutSeed(0);
+		  
+		  for (i = 0; i < N; i++) {
+		  x = Equilikely(1,2); //equally likely to be 5 or 10, substitute with 1 and 2, meaning you either got the 10 or you didnt
+		  count[x]++;
+		  }
+		  
+		  for (x = 1; x < 3; x++)                /* estimate probabilities */
+		  p[x] = (double) count[x] / N;
+		  
+		  printf("\nbased on %ld replications ", N);
+		  printf("the estimated probabilities are:\n\n");
+		  for (x = 1; x < 3; x++)
+		  printf("p[$%2ld] = %5.3f\n", 5*x, p[x]);
+		  printf("\n");
+		  
+		  return (0);
+		  }
+		\end{verbatim} 
+		My code gave the following probability results with these specific seeds as $x_0$ over 10,000 trials/replications each:\\
+		$\begin{array}{c c c}
+			\underline{x_0}&\underline{\$5}&\underline{\$10}\cr
+			900&.497&.503\cr
+			34509&.503&.497\cr
+			5&.500&.500\cr
+			42&.503&.497\cr
+			777&.501&.499
+		\end{array}$
+\item \textbf{Verify that the mean service time in Example 3.1.4 is 1.5. Verify that the steady-state statistics in Example 3.1.4 seem to be correct. Note the arrivale rate, service rate, and utilization are the same as those in Example 3.1.3, but all the other statistics are larger than those in 3.1.3. Explain why.}
+	\begin{enumerate}
+		\item With information given about Geometric Variates on page 105 of the text, and information about Uniform convergences on page 101, it is given that over time, a Uniform call will converge to $\frac{a+b}{2}$ and a Geometric call converges to $\frac{p}{1-p}$. Given the information in 3.1.4, this means that there are on average 10 tasks to do and the Uniform call will converge to .15 for random service time of each task. Since $10\times.15 = 1.5$,  this is enough to mathematically verify that 1.5 is the mean service time.
+		\item Given that $\bar{r} = 2.00$ and that the previous problem allowed us to determine that $ \bar{s} = 1.5$, this means utilization, $\bar{x}$, must be .75 (since $\bar{x} = \frac{\bar{s}}{\bar{r}}$).
+		\\This means the only steady state statistics not known at this point are $\bar{w},\bar{d}, \bar{l},$ and $\bar{q}$. These statistics need only fit around the already determined $\bar{r},\bar{s},\bar{x}$ values, and can realistically be a number of different values.
+		The following equations are known from the first chapter of the textbook:
+		$$\bar{w} = \bar{d} + \bar{s}$$
+		$$\bar{l} = \bar{q} + \bar{r}$$
+		Example 3.1.4 gives the following values:
+		$$\bar{w} = 5.77$$
+		$$\bar{d} = 4.27$$
+		$$\bar{l} = 2.89$$
+		$$\bar{q} = 2.14$$
+		Given the equations and determined values, the values present in example 3.1.4 are reasonable and correct.
+		\item The values in example 3.1.3 are different because they can be. The r,s, and x values are all independent of the other steady-state statistic values, and instead, those other values are determined by the arrival times, service time, and utilization. Use of different seeds would lead to differing queue lengths and queue build up, which leads to different overall times spent in the node and in the queue. So in theory, any value for w,d,l, or q should be reasonable as long as the values fit around the equations present in (b) and they match up with values that can be deciphered as r,s, and x.
+		
+	\end{enumerate}
+\end{enumerate}
+\end{document}

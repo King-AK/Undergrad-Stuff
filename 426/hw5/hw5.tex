@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 0pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+\centerline{VJ Davey}\vskip 0.10cm
+\begin{LARGE}
+\centerline {\bf CSci 426 Homework 6}
+\end{LARGE}
+\vskip 0.25cm
+\begin{enumerate}
+	\item\textbf{For both Fran and Bill, and based on 1 000 000 served customers, construct a table of the estimated steady-state probability that a customer will go to Ben and Jerry’s when the number of people in line N is 1, 2, 3, 4, and 5.}
+	\\The following was done by taking the existing ssq1 code and modifying it to represent a MM1N queue, where N is determined by the number of people in line. The results were found by using 1000000 customers and exponential arrival times, and exponential service distributions. This code can be shared if needed.\\
+	$\begin{array}{c c c}
+	\underline{\pi_{leave}}&\underline{Bill}&\underline{Fran}\cr
+	1&.3305& .2499\cr
+	2&.1425& .0766\cr
+	3&.0664& .0250\cr
+	4&.0324& .0081\cr
+	5&.0157& .0025\cr
+	\end{array}$
+	\item\textbf{Construct similar tables if the time to serve a customer for Fran is changed to be Uniform(5, 35) and the time to serve a customer for Bill changed to be Uniform(15,45).}
+	\\\\The following was done by taking the existing ssq1 code and modifying it to represent a MM1N queue, where N is determined by the number of people in line. The results were found by using 1000000 customers and exponential arrival times, and uniform service distributions. This code can be shared if needed.\\
+	$\begin{array}{c c c}
+	\underline{\pi_{leave}}&\underline{Bill}&\underline{Fran}\cr
+	1&.3311& .2503\cr
+	2&.1432& .0770\cr
+	3&.0659& .0248\cr
+	4&.0321& .0078\cr
+	5&.0161& .0030\cr
+	\end{array}$
+	\item\textbf{Comment on how the probability of rejection (i.e., the probability to go to Ben and Jerry’s) depends on the service process.}
+	\\Longer service times mean less jobs are completed per second. A lower service rate means that the chances that the system reaches capacity are more likely to happen. As we know, when the system reaches capacity, any new arrivals leave to Ben and Jerry's. This means we can get more business transactions done and have less rejections when service times are faster.
+	\item\textbf{Assuming exponentially distributed service times for both Fran and Bill, if N is equal to 3, which person is the more cost-effective to hire: Fran or Bill? Provide an analytic solution.}
+	\\Given exponentially distributed service times, we know Bill's average service rate  $\mu_{Bill} = \frac{1 job}{30 secs}$. We know Fran's average service rate  $\mu_{Fran}\frac{1 job}{20 secs}$. With N = 3, this means that our system has a capacity of 3 customers (one being served, and two waiting in line).  A diagram of our system, as both a Markov chain, and SSQ picture is below:
+	\vskip 6cm
+	This considered, we know that with an arrival rate $\lambda = \frac{1job}{60sec}$, only a fraction of those arriving jobs can actually enter the system. These arriving jobs can only enter the system when there are 0, 1, or 2 customers already in the system. When there are 3 customers currently in the system, any new arrivals are ignored.  Knowing this, we simply need to figure out the probability that we have three customers (which corresponds to being in state 3 of our Markov chain). This can be found with use of the following equation, replacing $\mu$ with Bill and Fran's respective values, and using n = 3, N = 3:
+	$$\pi_n = \frac{(\frac{\lambda}{\mu})^{n}(1-\frac{\lambda}{\mu})}{1-(\frac{\lambda}{\mu})^{N+1}}$$
+	 1 less the probability of being in state 3 times $\lambda$ is the throughput our system must maintain. After we know the throughput in jobs per second, we can convert this to hours, and multiply by the cost of a sno-cone to determine gross profit. We can then subtract what each worker demands per hour to calculate net profit. The worker which allows for higher net profit is the one to hire.\\ 
+			$\begin{array}{c c c}
+			\underline{}&\underline{Bill}&\underline{Fran}\cr
+			\pi_3&\frac{1}{15}&\frac{1}{40}\cr
+			TPUT(jobs/second)& 0.01\overline{555}& 0.01625\cr
+			TPUT(jobs/hour)& 56& 58.5\cr
+			Gross Profit(\$/hour)& 168.00& 175.50\cr
+			Wage Demanded(\$/hour)& 6.00& 12.00\cr
+			Net Profit(\$/hour)& 162.00&163.50
+			\end{array}$
+	\\Fran should be hired as she is most cost-effective.
+	\item\textbf{Discuss what you did to convince yourself that your results are correct.}
+	\\I convinced myself my results were correct by running my simulation and comparing it against the analytical results to see if I could get a match.
+\end{enumerate}
+\end{document}

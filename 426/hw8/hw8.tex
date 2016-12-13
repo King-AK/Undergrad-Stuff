@@ -1,0 +1,37 @@
+\documentclass[11pt]{article}
+
+\usepackage{exscale}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{times,mathptm}
+\usepackage{epsfig}
+
+\textwidth 6.5truein          
+\textheight 9.0truein
+\oddsidemargin 0.0in
+\topmargin -0.6in
+
+\parindent 0pt          
+\parskip 5pt
+\def\baselinestretch{1.1}
+
+\begin{document}
+\centerline{VJ Davey}\vskip 0.10cm
+\begin{LARGE}
+\centerline {\bf CSci 426 Homework 8}
+\end{LARGE}
+\vskip 0.25cm
+\begin{enumerate}
+	\item 7.1.11
+	\\The mean of a standardized random variable $Y=(X-\mu)/\sigma$ has to be 0. This is because Y is defined to be standardized, and as such, its mean has to be 0. The variance of Y must 1 for the same reason. 
+	\\To better explain this with expected value notation we can consider the technique on PG 288 of the textbook. $\mu'$ is the mean of Y.
+	$$\mu' = E[Y] = E[(X-\mu)/\sigma] = E[X/\sigma] - \mu/\sigma = \mu/\sigma - \mu/\sigma= 0 $$
+	\\Variance can be found in the same fashion. 
+	$$(\sigma)^2 = E[(Y - \mu')^2] = 0$$
+	
+	
+	\item 7.3.1
+	\\Code is attached. Changes for parts a and b were made to suit suggestions on pages 258, 311, and 312 of textbook. For both changes, after looking over multiple runs, it appears that making it so that service times greater than 3.0 impossible led to slightly lower service times on average. This would lead to lower delay times, wait times, numbers in the node and queue, and slightly lower utilization for both a and b when compared to unedited ssq4 code. My belief for these statistical changes is that due to confining the range of possible service time values between 0 and 3, we keep the lower outliers but remove our higher outliers. This allows the data to skew.
+\end{enumerate}
+\end{document}
