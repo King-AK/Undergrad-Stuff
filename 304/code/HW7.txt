@@ -1,0 +1,57 @@
+VJ Davey
+HW 7
+CS304
+
+Structure and Alignment
+
+	Allocation for a Node Struct:
+	*There are gaps following char c, char d, and short unit, in order to accomodate alignment restrictions for the data types that immediately follow them
+
+	||\INT VALUE : 4B \CHAR C : 1B\---+---+---||\NODE POINTER LEFT: 4B\CHAR D: 1B\---+\SHORT FLAG: 2B\||\NODE POINTER RIGHT : 4B\SHORT UNIT: 2B\---+---||\NODE POINTER NEXT : 4B\---+---+---+---||
+	left = +8
+	right = +16
+	next = +24
+
+	1) E
+	2) A
+	3) B
+
+Union
+	little endian
+
+	5678 1234 a987
+	44434241 fedc0045
+	c3d4a1b2 1728e5f6
+
+
+Implicit List Header
+	Block size rounded up to nearest multiple of 8 bytes
+
+	Request  Block size (decimal bytes)  Block header (hex)
+
+	malloc(3)   _______8__________      ________0x9________
+	malloc(11) ________16_________      ________0x11________
+	malloc(20) ________24_________      _______0x19_________
+	malloc(21) ________24_________      ______0x19__________
+
+
+Next-Fit
+
+	//does a next-fit search of an implicit free list.
+	static void *find_fit(size_t asize)
+	{
+		void *bp;
+
+	   	 for (bp = heap_listp; GET_SIZE(HDRP(bp)) > 0; bp = NEXT_BLKP(bp)) {
+   		 if (!GET_ALLOC(HDRP(bp)) && (asize <= GET_SIZE(HDRP(bp)))) 
+			{
+       		 	return bp;
+			}
+    		}
+ 		return NULL; 
+
+	}
+
+
+Malloc Lab
+	Done.

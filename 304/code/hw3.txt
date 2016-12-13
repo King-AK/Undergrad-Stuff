@@ -1,0 +1,46 @@
+Homework 3
+VJ Davey
+
+
+1) *- I was unsure if you wanted us to keep everything in 8-bit hexadecimal. The prompt did not clarify, so I did not take the time to take overflow into account and keep everything in 8 bit. Some answers are 9 because they get so big.
+   a. 0x8b
+   b. 0xc4
+   c. 0x08048a6b 
+   d. 0x73
+   e. 0xa8
+   f. 08048a37
+   g. 1136CE7AD 
+   h. dc5b2ea
+   i. 523b974c
+   j. 40245413
+
+2) 	
+       *using the command "gcc -S test.c -o output.asm -masm=intel" will give a readable file which gives us the source code in assembly
+        
+	*Im going to pull parts of my gcc generated machine code and comment why it gives the specific assembly code. I had to rewrite some of it too, because it doesnt match the format given to us.
+	*there were some extra .cfi functions in there. I have no idea what they meant so I excluded them.
+
+	mov1 8(%ebp), %eax //this is x
+	mov1 12(%ebp), %edx //this is y
+	cmp %eax, %edx
+	jle L2
+	nop
+
+	//this represents the else block
+	L3:
+	sub %edx, %eax //x - y
+	mov1 %eax, %edx //I have no idea why my machine is doing this
+	add %eax, %eax //x + x == x * 2
+	mov1 -4(%ebp), %eax //move the result into the register 
+	jmp L4 //skip the next set of instructions, jump to end
+	
+	//this is first part of the if-else block
+	L2:
+	add %eax, %edx//add x and y together
+	mov1 -4(%ebp),%eax //move the result into the register
+	nop
+	
+	L4:
+	leave
+	ret
+	

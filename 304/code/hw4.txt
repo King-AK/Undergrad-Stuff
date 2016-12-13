@@ -1,0 +1,47 @@
+VJ Davey
+HW4
+
+1) Conversion to pointer based code
+
+void shift( int * a, int n )
+{
+	int i;
+	for(i = 0; i != n-1; i++)
+		*(a+i) = *(a+i+1);
+}
+
+2) 
+a. 0x4680
+b. null
+c. A
+d. C
+e. B
+f. A
+g. 0x4682
+h. C
+i. B
+j. 0x4680
+k. 0x4681, B
+l. 0x4681, C
+m. 0x4682, B
+n. C
+
+6)Stack Frame
+
+	eax - 0xbf9d1918
+	ebx - 0x40157ff4
+	ecx - 0x40051e65
+	edx - 0x00000001
+	esp - 0xbf9d18e8
+	ebp - 0xbf9d18e8
+	{
+		ebp-4 - 0x37
+		ebp-8 - 0x2c
+		ebp-12 - 0x21
+	}
+	esi - 0x00000000
+	edi - 0x40015cc0
+	eip - 0x080483e8
+
+4) Three numbers that dont set off the bomb : 
+2, 6, 4 (in that order)

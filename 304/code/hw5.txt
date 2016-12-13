@@ -1,0 +1,41 @@
+VJ Davey 
+HW5
+
+1) The add function isnt properly adjusting the z variable to be whatever the value of x+y is. 
+
+adjusted code:
+#include <stdio.h>
+
+int add(int a, int b)
+{
+  int c =a+b;
+  return c;
+}
+int main() {
+    int x=1,y=2, z;
+    printf("%d\n",z);
+    z = add(x,y);
+    printf("x=%d, y=%d, and x+y=%d\n", x,y,z);
+    return 0;
+}
+
+Assembly code (5 problems)
+
+2) fun3
+
+3) fun6
+
+4) int loop(int x, int y)
+{
+	int i;
+	int r = y;
+	for(i= x; i<r ; i++)
+	{
+		i--;
+	}
+	return r;
+}
+
+5) fun7 corresponds to choice 6
+   fun8 corresponds to choice 5
+   fun9 corresponds to none

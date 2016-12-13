@@ -1,0 +1,65 @@
+Lab 3 Extracts
+
+Read 3.12, All of Chapter 6
+
+
+due March 26th
+-meant to help develop an understading of the calling stack organization on an IA32 processor. 
+-Involves applying a series of buffer overflow attacks (exploits) on an executable file called bufbomb.
+
+Firsthand experience with one of the methods commonly used to exploit security weaknesses in operating systems
+and network servers. 
+Purpose is to learn about runtime operation of programs and understand the nature of this form of security weakness
+so it can be avoided when I continue on to write system code. 
+
+Download/extract .tar file
+3 files:
+	-bufbomb: buffer bomb program to attack
+	-makecookie: generates a cookie based on userID
+	-hex2raw: used to help convert between string formats
+All compiled to run on the linux machines in 121.
+
+The Cookie:
+	-correct solution is based on userID
+	-a cookie is a string of eight hexadecimal digits that has a high probability of being unique to 
+	my userID
+	-generate cookie with makecookie and use my userID as the argument:
+		eg. unix> ./makecookie akdavey
+		    0x1005b3b9 <<output
+	-four of the five buffer attacks involve making my cookie show up in places where it normally wouldnt
+
+Bufbomb:
+	-reads a string from stdin using the function getbuf(). In C code this is:
+		
+		/*Buffer size for getbuf */
+    		#define NORMAL_BUFFER_SIZE 32
+
+		int getbuf()
+    		{
+		        char buf[NORMAL_BUFFER_SIZE];
+		        Gets(buf);
+		        return 1;
+		}
+
+	-The functions Gets() will read a string from stdin and store it at a specified destination, in this case, the array buf. It will be an array having enough space for 32 characters.
+	-Gets() has no way of knowing if buf[] is large enough to store the whole input. It just copies the entire input string and possibly overruns the bounds of storage allocated at the destination.
+	-Being under 31 chars of input makes getbuf() return 1. Being over TYPICALLY causes program state corruption, leading to mem access error.
+	-Be clever with the input strings to lead to more interesting things. Find the "exploit strings"
+	-There are several command line arguments to use with bufbomb - check the documentation online
+	-Think about the x86 stack structure a bit and figure out what entries of the stack you will target. Also looking at the example online, think about why it would have caused a segmentation fault.
+	
+	-exploit strings will typically contain byte values that do not correspond to the ASCII values for printing chracters. The program hex2raw is useful in generating those raw strings. 
+	-Hex characters passed to hex2raw should be seperated by whitespace. 
+
+	-exploit string must not contain the byte 0x0A at any intermediate position, that is the ASCII code for /n. Gets() will terminate the string at that position.
+	-hex2raw expects two-digit hex values seperated by white space. 
+	-no penalty for making mistakes in this lab. Feel free to fire away with any string.
+	-check the various levels on the documentation.
+
+Logistical Notes:
+	-grade updates automatically
+	-levels need not be completed in order
+
+Generating Byte Codes:
+	use objdump as a disassembler to generate byte code for instruction sequences. 
+	

